@@ -329,17 +329,6 @@
             box-shadow: 0 8px 25px rgba(83, 52, 131, 0.5);
         }
 
-        .btn-print {
-            background: linear-gradient(135deg, #2d6a4f, #40916c);
-            color: white;
-            box-shadow: 0 4px 15px rgba(45, 106, 79, 0.4);
-        }
-
-        .btn-print:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(45, 106, 79, 0.5);
-        }
-
         .btn-clear {
             background: linear-gradient(135deg, #c0392b, #e74c3c);
             color: white;
@@ -740,10 +729,6 @@
                                 <label>Técnico responsable *</label>
                                 <input type="text" name="tecnico" id="tecnico" placeholder="Nombre del técnico" required>
                             </div>
-                            <div class="form-group">
-                                <label>Nº identificación / colegiado</label>
-                                <input type="text" name="idTecnico" id="idTecnico" placeholder="Nº identificación">
-                            </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
@@ -905,9 +890,6 @@
                 <button type="button" class="btn btn-send" onclick="sendByEmail()">
                     📧 Enviar por Correo
                 </button>
-                <button type="button" class="btn btn-print" onclick="printReport()">
-                    🖨️ Imprimir
-                </button>
                 <button type="button" class="btn btn-clear" onclick="clearForm()">
                     🗑️ Limpiar Formulario
                 </button>
@@ -1043,14 +1025,6 @@
             } else {
                 showNotification('Debe haber al menos una incidencia registrada', 'error');
             }
-        }
-
-        // Función de impresión mejorada
-        function printReport() {
-            showNotification('Preparando impresión con colores...', 'success');
-            setTimeout(() => {
-                window.print();
-            }, 500);
         }
 
         function sendByEmail() {
