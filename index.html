@@ -776,27 +776,6 @@
                     </div>
                 </div>
 
-                <!-- OBSERVACIONES -->
-                <div class="section">
-                    <div class="section-title">
-                        <span class="icon">📝</span> Observaciones Generales
-                    </div>
-                    <div class="section-content">
-                        <div class="form-group">
-                            <label>Observaciones adicionales</label>
-                            <textarea name="observaciones" id="observaciones"
-                                placeholder="Añada cualquier observación adicional relevante..."
-                                style="min-height:120px;"></textarea>
-                        </div>
-                        <div class="form-group" style="margin-top:15px;">
-                            <label>Trabajos pendientes para próxima visita</label>
-                            <textarea name="pendientes" id="pendientes"
-                                placeholder="Liste los trabajos que quedan pendientes..."
-                                style="min-height:80px;"></textarea>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- EMAIL - Se oculta al imprimir -->
                 <div class="section email-section">
                     <div class="section-title">
@@ -1048,16 +1027,6 @@
                     body += `  Descripción: ${incDescripciones[i].value || 'Sin descripción'}%0D%0A`;
                     body += `  Recomendación: ${incRecomendaciones[i].value || 'Sin recomendación'}%0D%0A`;
                 }
-            }
-
-            const observaciones = document.getElementById('observaciones').value;
-            const pendientes = document.getElementById('pendientes').value;
-
-            if (observaciones) {
-                body += `%0D%0AOBSERVACIONES%0D%0A-------------%0D%0A${observaciones}%0D%0A`;
-            }
-            if (pendientes) {
-                body += `%0D%0ATRABAJOS PENDIENTES%0D%0A-------------------%0D%0A${pendientes}%0D%0A`;
             }
 
             body += `%0D%0A=================================%0D%0A`;
