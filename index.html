@@ -241,67 +241,6 @@
             font-size: 14px;
         }
 
-        .checkbox-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 5px;
-        }
-
-        .checkbox-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-        }
-
-        .checkbox-item input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            accent-color: #533483;
-            cursor: pointer;
-        }
-
-        .checkbox-item label {
-            font-size: 14px;
-            color: #333;
-            cursor: pointer;
-            text-transform: none;
-            font-weight: normal;
-        }
-
-        .signature-area {
-            display: flex;
-            gap: 40px;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        .signature-box {
-            flex: 1;
-            min-width: 250px;
-            text-align: center;
-        }
-
-        .signature-line {
-            border: none;
-            border-bottom: 2px solid #333;
-            width: 100%;
-            padding: 10px;
-            margin-top: 50px;
-            font-size: 14px;
-            text-align: center;
-            background: transparent;
-        }
-
-        .signature-label {
-            font-size: 12px;
-            color: #666;
-            margin-top: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
         .buttons-section {
             padding: 30px 40px;
             background: #f8f9fa;
@@ -437,7 +376,6 @@
                 padding: 12px 20px;
                 font-size: 14px;
             }
-            .signature-area { flex-direction: column; gap: 20px; }
             .work-table { font-size: 12px; }
         }
 
@@ -579,23 +517,6 @@
                 background: #0f3460 !important;
                 color: white !important;
                 -webkit-print-color-adjust: exact !important;
-            }
-
-            /* Checkboxes */
-            .checkbox-item input[type="checkbox"] {
-                accent-color: #533483 !important;
-                -webkit-print-color-adjust: exact !important;
-            }
-
-            /* Firmas */
-            .signature-line {
-                border-bottom: 2px solid #333 !important;
-                margin-top: 40px !important;
-            }
-
-            .signature-label {
-                color: #0f3460 !important;
-                font-weight: 600 !important;
             }
 
             /* Ocultar elementos no imprimibles */
@@ -872,37 +793,6 @@
                             <textarea name="pendientes" id="pendientes"
                                 placeholder="Liste los trabajos que quedan pendientes..."
                                 style="min-height:80px;"></textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- CONFORMIDAD -->
-                <div class="section">
-                    <div class="section-title">
-                        <span class="icon">✅</span> Conformidad y Firmas
-                    </div>
-                    <div class="section-content">
-                        <div class="checkbox-group" style="margin-bottom:20px;">
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="checkConform" name="conformidad">
-                                <label for="checkConform">El cliente da su conformidad a los trabajos realizados</label>
-                            </div>
-                        </div>
-                        <div class="checkbox-group" style="margin-bottom:30px;">
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="checkClean" name="limpiezaZona">
-                                <label for="checkClean">Se ha dejado la zona de trabajo limpia y ordenada</label>
-                            </div>
-                        </div>
-                        <div class="signature-area">
-                            <div class="signature-box">
-                                <input type="text" class="signature-line" name="firmaTecnico" placeholder="Nombre del técnico">
-                                <div class="signature-label">Firma del Técnico</div>
-                            </div>
-                            <div class="signature-box">
-                                <input type="text" class="signature-line" name="firmaCliente" placeholder="Nombre y cargo">
-                                <div class="signature-label">Conforme del Cliente</div>
-                            </div>
                         </div>
                     </div>
                 </div>
