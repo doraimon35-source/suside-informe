@@ -1058,18 +1058,18 @@
             const horaFin = document.getElementById('horaFin').value || 'No especificada';
             const contacto = document.getElementById('contacto').value || 'No especificado';
 
-            let body = `INFORME DE TRABAJOS REALIZADOS%0D%0A`;
-            body += `=================================%0D%0A%0D%0A`;
-            body += `Empresa: SUSIDER%0D%0A`;
-            body += `Dirección: Carrer del Fornal, 55, 08292 Esparraguera, Barcelona%0D%0A`;
-            body += `Nº Informe: ${reportNum}%0D%0A`;
-            body += `Fecha: ${fecha}%0D%0A`;
-            body += `Horario: ${horaInicio} - ${horaFin}%0D%0A`;
-            body += `Técnico: ${tecnico}%0D%0A`;
-            body += `Contacto en planta: ${contacto}%0D%0A%0D%0A`;
+            let body = `INFORME DE TRABAJOS REALIZADOS\r\n`;
+            body += `=================================\r\n\r\n`;
+            body += `Empresa: SUSIDER\r\n`;
+            body += `Dirección: Carrer del Fornal, 55, 08292 Esparraguera, Barcelona\r\n`;
+            body += `Nº Informe: ${reportNum}\r\n`;
+            body += `Fecha: ${fecha}\r\n`;
+            body += `Horario: ${horaInicio} - ${horaFin}\r\n`;
+            body += `Técnico: ${tecnico}\r\n`;
+            body += `Contacto en planta: ${contacto}\r\n\r\n`;
 
-            body += `TRABAJOS REALIZADOS%0D%0A`;
-            body += `-------------------%0D%0A`;
+            body += `TRABAJOS REALIZADOS\r\n`;
+            body += `-------------------\r\n`;
 
             const ubicaciones = document.querySelectorAll('input[name="ubicacion[]"]');
             const tipos = document.querySelectorAll('select[name="tipoTrabajo[]"]');
@@ -1079,17 +1079,17 @@
 
             for (let i = 0; i < ubicaciones.length; i++) {
                 if (ubicaciones[i].value || descripciones[i].value) {
-                    body += `%0D%0ATrabajo ${i + 1}:%0D%0A`;
-                    body += `  Ubicación: ${ubicaciones[i].value || 'No especificada'}%0D%0A`;
-                    body += `  Tipo: ${tipos[i].options[tipos[i].selectedIndex].text || 'No especificado'}%0D%0A`;
-                    body += `  Descripción: ${descripciones[i].value || 'Sin descripción'}%0D%0A`;
-                    body += `  Material: ${materiales[i].value || 'No especificado'}%0D%0A`;
-                    body += `  Estado: ${estados[i].options[estados[i].selectedIndex].text || 'No especificado'}%0D%0A`;
+                    body += `\r\nTrabajo ${i + 1}:\r\n`;
+                    body += `  Ubicación: ${ubicaciones[i].value || 'No especificada'}\r\n`;
+                    body += `  Tipo: ${tipos[i].options[tipos[i].selectedIndex].text || 'No especificado'}\r\n`;
+                    body += `  Descripción: ${descripciones[i].value || 'Sin descripción'}\r\n`;
+                    body += `  Material: ${materiales[i].value || 'No especificado'}\r\n`;
+                    body += `  Estado: ${estados[i].options[estados[i].selectedIndex].text || 'No especificado'}\r\n`;
                 }
             }
 
-            body += `%0D%0AINCIDENCIAS DETECTADAS%0D%0A`;
-            body += `---------------------%0D%0A`;
+            body += `\r\nINCIDENCIAS DETECTADAS\r\n`;
+            body += `---------------------\r\n`;
 
             const incUbicaciones = document.querySelectorAll('input[name="incUbicacion[]"]');
             const incGravedades = document.querySelectorAll('select[name="incGravedad[]"]');
@@ -1098,16 +1098,16 @@
 
             for (let i = 0; i < incUbicaciones.length; i++) {
                 if (incUbicaciones[i].value || incDescripciones[i].value) {
-                    body += `%0D%0AIncidencia ${i + 1}:%0D%0A`;
-                    body += `  Ubicación: ${incUbicaciones[i].value || 'No especificada'}%0D%0A`;
-                    body += `  Gravedad: ${incGravedades[i].options[incGravedades[i].selectedIndex].text || 'No especificada'}%0D%0A`;
-                    body += `  Descripción: ${incDescripciones[i].value || 'Sin descripción'}%0D%0A`;
-                    body += `  Recomendación: ${incRecomendaciones[i].value || 'Sin recomendación'}%0D%0A`;
+                    body += `\r\nIncidencia ${i + 1}:\r\n`;
+                    body += `  Ubicación: ${incUbicaciones[i].value || 'No especificada'}\r\n`;
+                    body += `  Gravedad: ${incGravedades[i].options[incGravedades[i].selectedIndex].text || 'No especificada'}\r\n`;
+                    body += `  Descripción: ${incDescripciones[i].value || 'Sin descripción'}\r\n`;
+                    body += `  Recomendación: ${incRecomendaciones[i].value || 'Sin recomendación'}\r\n`;
                 }
             }
 
-            body += `%0D%0A=================================%0D%0A`;
-            body += `Informe generado el ${new Date().toLocaleString('es-ES')}%0D%0A`;
+            body += `\r\n=================================\r\n`;
+            body += `Informe generado el ${new Date().toLocaleString('es-ES')}\r\n`;
 
             const asunto = document.getElementById('asunto').value || `Informe de Trabajos - SUSIDER - ${fecha}`;
 
@@ -1115,9 +1115,9 @@
             const emailCC = document.getElementById('emailCC').value;
 
             if (emailCC) {
-                mailtoLink += `?cc=${emailCC}&subject=${encodeURIComponent(asunto)}&body=${body}`;
+                mailtoLink += `?cc=${encodeURIComponent(emailCC)}&subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(body)}`;
             } else {
-                mailtoLink += `?subject=${encodeURIComponent(asunto)}&body=${body}`;
+                mailtoLink += `?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(body)}`;
             }
 
             window.location.href = mailtoLink;
