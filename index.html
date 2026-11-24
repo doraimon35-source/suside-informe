@@ -11,20 +11,26 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
             min-height: 100vh;
-            padding: 20px;
+            padding: clamp(8px, 3vw, 20px);
             color: #333;
+            -webkit-font-smoothing: antialiased;
         }
 
         .container {
             max-width: 900px;
             margin: 0 auto;
             background: #ffffff;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border-radius: clamp(12px, 3vw, 20px);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
             overflow: hidden;
         }
 
@@ -36,14 +42,14 @@
         }
 
         .header h1 {
-            font-size: 28px;
+            font-size: clamp(18px, 5.2vw, 28px);
             margin-bottom: 5px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: clamp(0.5px, 0.4vw, 2px);
         }
 
         .header p {
-            font-size: 14px;
+            font-size: clamp(12px, 3.2vw, 14px);
             opacity: 0.8;
         }
 
@@ -51,7 +57,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 40px;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding: 20px clamp(16px, 5vw, 40px);
             background: #f8f9fa;
             border-bottom: 3px solid #0f3460;
         }
@@ -81,11 +89,11 @@
         }
 
         .form-body {
-            padding: 30px 40px;
+            padding: clamp(18px, 4vw, 30px) clamp(16px, 5vw, 40px);
         }
 
         .section {
-            margin-bottom: 30px;
+            margin-bottom: 24px;
             border: 2px solid #e0e0e0;
             border-radius: 12px;
             overflow: hidden;
@@ -94,8 +102,8 @@
         .section-title {
             background: linear-gradient(135deg, #0f3460, #533483);
             color: white;
-            padding: 12px 20px;
-            font-size: 16px;
+            padding: 12px clamp(14px, 4vw, 20px);
+            font-size: clamp(14px, 3.8vw, 16px);
             font-weight: 600;
             display: flex;
             align-items: center;
@@ -103,11 +111,11 @@
         }
 
         .section-title .icon {
-            font-size: 20px;
+            font-size: clamp(17px, 4.5vw, 20px);
         }
 
         .section-content {
-            padding: 20px;
+            padding: clamp(14px, 3.5vw, 20px);
             background: #fafbfc;
         }
 
@@ -119,8 +127,8 @@
         }
 
         .form-group {
-            flex: 1;
-            min-width: 200px;
+            flex: 1 1 220px;
+            min-width: 0;
         }
 
         .form-group label {
@@ -128,7 +136,7 @@
             font-weight: 600;
             color: #0f3460;
             margin-bottom: 6px;
-            font-size: 13px;
+            font-size: clamp(12px, 3.2vw, 13px);
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -137,12 +145,14 @@
         .form-group select,
         .form-group textarea {
             width: 100%;
-            padding: 10px 14px;
+            padding: 12px 14px;
             border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 14px;
+            border-radius: 10px;
+            font-size: 16px;
             font-family: inherit;
-            transition: all 0.3s ease;
+            min-height: 46px;
+            touch-action: manipulation;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
             background: white;
         }
 
@@ -253,15 +263,18 @@
 
         .btn {
             padding: 14px 35px;
+            min-height: 48px;
             border: none;
             border-radius: 10px;
-            font-size: 16px;
+            font-size: clamp(14px, 3.6vw, 16px);
             font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 10px;
-            transition: all 0.3s ease;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -302,13 +315,16 @@
         .btn-add {
             background: #0f3460;
             color: white;
-            padding: 8px 20px;
+            padding: 10px 20px;
+            min-height: 44px;
             border: none;
-            border-radius: 6px;
+            border-radius: 10px;
             cursor: pointer;
-            font-size: 13px;
+            font-size: 14px;
             margin-top: 10px;
-            transition: all 0.3s ease;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            transition: background 0.2s ease;
         }
 
         .btn-add:hover {
@@ -320,14 +336,17 @@
             color: white;
             border: none;
             border-radius: 50%;
-            width: 28px;
-            height: 28px;
+            width: 44px;
+            height: 44px;
+            flex: 0 0 44px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 22px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            transition: background 0.2s ease, transform 0.2s ease;
         }
 
         .btn-remove:hover {
@@ -362,21 +381,34 @@
             to { transform: translateX(0); opacity: 1; }
         }
 
-        /* Responsive */
-        @media (max-width: 600px) {
-            .form-body, .buttons-section, .logo-section {
-                padding: 15px 20px;
+        /* Responsive: una sola columna en movil, sin desbordamientos */
+        @media (max-width: 640px) {
+            body { padding: 8px; }
+            .container { border-radius: 12px; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25); }
+            .header { padding: 20px 16px; }
+            .logo-section {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 16px 20px;
             }
-            .header { padding: 20px; }
-            .header h1 { font-size: 20px; }
-            .form-row { flex-direction: column; gap: 10px; }
+            .logo-section .report-number { text-align: left; }
+            #reportNumber { width: 100% !important; max-width: 100% !important; }
+            .form-body, .buttons-section { padding: 16px; }
+            .form-row { flex-direction: column; gap: 12px; }
+            .form-group { flex: 1 1 auto; min-width: 0; }
+            .section { margin-bottom: 18px; }
             .btn {
                 width: 100%;
                 justify-content: center;
-                padding: 12px 20px;
+                padding: 12px 16px;
+            }
+            .notification {
+                top: 10px;
+                left: 10px;
+                right: 10px;
+                padding: 12px 16px;
                 font-size: 14px;
             }
-            .work-table { font-size: 12px; }
         }
 
         /* ============================================= */
@@ -620,7 +652,7 @@
             <div class="report-number">
                 <strong>Nº Informe</strong>
                 <input type="text" id="reportNumber" placeholder="INF-2026-001"
-                    style="width:160px; padding:6px 10px; border:2px solid #0f3460; border-radius:6px; text-align:center; font-weight:bold;">
+                    style="width:160px; max-width:100%; padding:8px 10px; border:2px solid #0f3460; border-radius:8px; text-align:center; font-weight:bold; font-size:16px;">
             </div>
         </div>
 
