@@ -92,6 +92,45 @@
             padding: clamp(18px, 4vw, 30px) clamp(16px, 5vw, 40px);
         }
 
+        .tabs {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: clamp(6px, 2vw, 10px);
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            min-height: 48px;
+            padding: 10px 6px;
+            border: 2px solid #0f3460;
+            border-radius: 10px;
+            background: #f8f9fa;
+            color: #0f3460;
+            font-family: inherit;
+            font-size: clamp(12px, 3.2vw, 14px);
+            font-weight: 600;
+            line-height: 1.2;
+            cursor: pointer;
+            text-align: center;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .tab[aria-selected="true"] {
+            background: linear-gradient(135deg, #0f3460, #533483);
+            color: white;
+            border-color: #533483;
+        }
+
+        .section[hidden] {
+            display: none !important;
+        }
+
+        .section-title {
+            display: none;
+        }
+
         .section {
             margin-bottom: 24px;
             border: 2px solid #e0e0e0;
@@ -394,6 +433,8 @@
             .logo-section .report-number { text-align: left; }
             #reportNumber { width: 100% !important; max-width: 100% !important; }
             .form-body, .buttons-section { padding: 16px; }
+            .tabs { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+            .tab { min-height: 46px; padding: 8px 4px; }
             .form-row { flex-direction: column; gap: 12px; }
             .form-group { flex: 1 1 auto; min-width: 0; }
             .section { margin-bottom: 18px; }
@@ -465,6 +506,7 @@
 
             /* Títulos de sección con color */
             .section-title {
+                display: flex !important;
                 background: linear-gradient(135deg, #0f3460, #533483) !important;
                 color: white !important;
                 padding: 10px 15px !important;
@@ -552,8 +594,14 @@
             }
 
             /* Ocultar elementos no imprimibles */
-            .buttons-section {
+            .buttons-section,
+            .tabs {
                 display: none !important;
+            }
+
+            /* Imprimir todas las pestañas, no solo la activa */
+            .section[hidden]:not(.email-section) {
+                display: block !important;
             }
 
             .btn-remove {
@@ -659,8 +707,16 @@
         <form id="workReportForm">
             <div class="form-body">
 
+                <!-- PESTAÑAS -->
+                <div class="tabs" role="tablist" aria-label="Secciones del informe">
+                    <button type="button" class="tab" role="tab" id="tab-datos" aria-controls="panel-datos" aria-selected="true" data-tab="datos" onclick="switchTab('datos')">📌 Datos</button>
+                    <button type="button" class="tab" role="tab" id="tab-trabajos" aria-controls="panel-trabajos" aria-selected="false" data-tab="trabajos" onclick="switchTab('trabajos')">🔧 Trabajos</button>
+                    <button type="button" class="tab" role="tab" id="tab-incidencias" aria-controls="panel-incidencias" aria-selected="false" data-tab="incidencias" onclick="switchTab('incidencias')">⚠️ Incidencias</button>
+                    <button type="button" class="tab" role="tab" id="tab-email" aria-controls="panel-email" aria-selected="false" data-tab="email" onclick="switchTab('email')">📧 Envío</button>
+                </div>
+
                 <!-- DATOS GENERALES -->
-                <div class="section">
+                <div class="section tab-panel" id="panel-datos" role="tabpanel" aria-labelledby="tab-datos">
                     <div class="section-title">
                         <span class="icon">📌</span> Datos Generales
                     </div>
@@ -703,7 +759,7 @@
                 </div>
 
                 <!-- TRABAJOS REALIZADOS -->
-                <div class="section">
+                <div class="section tab-panel" id="panel-trabajos" role="tabpanel" aria-labelledby="tab-trabajos" hidden>
                     <div class="section-title">
                         <span class="icon">🔧</span> Trabajos Realizados
                     </div>
@@ -762,7 +818,7 @@
                 </div>
 
                 <!-- INCIDENCIAS -->
-                <div class="section">
+                <div class="section tab-panel" id="panel-incidencias" role="tabpanel" aria-labelledby="tab-incidencias" hidden>
                     <div class="section-title">
                         <span class="icon">⚠️</span> Incidencias Detectadas
                     </div>
@@ -809,7 +865,7 @@
                 </div>
 
                 <!-- EMAIL - Se oculta al imprimir -->
-                <div class="section email-section">
+                <div class="section email-section tab-panel" id="panel-email" role="tabpanel" aria-labelledby="tab-email" hidden>
                     <div class="section-title">
                         <span class="icon">📧</span> Envío por Correo Electrónico
                     </div>
@@ -866,6 +922,16 @@
     <script>
         let workCount = 1;
         let incidenceCount = 1;
+
+        function switchTab(name) {
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.setAttribute('aria-selected', tab.dataset.tab === name ? 'true' : 'false');
+            });
+            document.querySelectorAll('.tab-panel').forEach(panel => {
+                panel.hidden = panel.id !== 'panel-' + name;
+            });
+            window.scrollTo(0, 0);
+        }
 
         function addWorkRow() {
             workCount++;
@@ -993,16 +1059,19 @@
             const emailDestino = document.getElementById('emailDestino').value;
 
             if (!fecha) {
+                switchTab('datos');
                 showNotification('Por favor, introduzca la fecha de ejecución', 'error');
                 document.getElementById('fecha').focus();
                 return;
             }
             if (!tecnico) {
+                switchTab('datos');
                 showNotification('Por favor, introduzca el nombre del técnico', 'error');
                 document.getElementById('tecnico').focus();
                 return;
             }
             if (!emailDestino) {
+                switchTab('email');
                 showNotification('Por favor, introduzca el correo electrónico de destino', 'error');
                 document.getElementById('emailDestino').focus();
                 return;
